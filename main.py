@@ -1,4 +1,5 @@
 import discord
+import json
 
 ### Commands ###
 from commands.insult import insult
@@ -6,6 +7,8 @@ from commands.smashmouth import smashmouth
 from commands.reddit import hentai, reddit_random
 from commands.speaker import speaker
 
+
+config = json.loads(open('config.json').read())  # Load Configs, primarily token
 client = discord.Client()
 
 
@@ -34,5 +37,4 @@ async def on_message(message):
     if message.content.startswith('!speaker'):
         await speaker(client, message)
 
-
-client.run('MjUwNzM5MzY1NzcxMjE0ODQ4.Cxd5nA.H9dz7vVSpf3lGb5oN6r6y5AtHkk')
+client.run(config["token"])
