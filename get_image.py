@@ -18,29 +18,23 @@ def get_json(category, next_page=None):
 
 def get_image_url(subreddit):
 
-    category = None
     data = None
     urls = []
     for i in range(0, 5):
         # get initial request
         status_code = 0
         while status_code != 200:
-            if category is None or status_code != 0:
-                # select category
-                category = subreddit
 
             next_page = None
             if data is not None:
                 next_page = data['after']
 
             # do the request
-            resp = get_json(category, next_page)
+            resp = get_json(subreddit, next_page)
 
             # update status code
             status_code = resp.status_code
-            if status_code != 200:
-                print(status_code)
-            if status_code == 403 or status_code == 404:
+            if status_code in [403, 404]:
                 return 'Nothing Found (403 or 404)'
 
         data = resp.json()['data']

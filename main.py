@@ -8,7 +8,8 @@ bot = commands.Bot(command_prefix='!', description="Basimot's BasiBot!")
 
 def get_insult():
     r = requests.get("http://www.insultgenerator.org")
-    return r.text.split("<div class=\"wrap\">")[1].split("<br><br>")[1].split('</div>')[0].replace('&nbsp', ' ').replace("&#44", "")
+    return r.text.split("<div class=\"wrap\">")[1].split("<br><br>")[1].split('</div>')[0]\
+        .replace('&nbsp', ' ').replace("&#44", "").replace(";", '')
 
 
 @bot.event
@@ -48,11 +49,12 @@ async def random(subreddit: str):
 async def insult(user: str):
     try:
         print(user)
-        if "basibot" in user.lower() or "250739365771214848" in user.lower():
+        if any(name for name in ["basibot", "250739365771214848"] if name in user.lower()):
             await bot.say("{0} {1}".format(user, "Damn, you are one sexy bot."))
-        elif "brandon" in user.lower() or "basimot" in user.lower() or "102645145815490560" in user.lower() or "reznok" in user.lower() or "monnstermash" in user.lower():
+        elif any(name for name in ["brandon", "basimot", "102645145815490560", "reznok", "monnstermash"]
+                 if name in user.lower()):
             await bot.say("I would never insult my master.")
-        elif "185167277702774794" in user.lower() or "speaker" in user.lower():
+        elif any(name for name in ["185167277702774794", "speaker"] if name in user.lower()):
             await bot.say("{0} {1} {2}".format(user, get_insult(), "Also, your DPS is terrible."))
         else:
             await bot.say("{0} {1}".format(user, get_insult()))
@@ -61,4 +63,4 @@ async def insult(user: str):
         await bot.say("ERROR: %s" % e)
         return
 
-bot.run('')
+bot.run('MjUwNzM5MzY1NzcxMjE0ODQ4.CxdyJQ.UcGpA5X46JYnOLWW4dYpesY0xH8')
