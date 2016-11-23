@@ -8,9 +8,19 @@ from commands.reddit import hentai, reddit_random
 from commands.speaker import speaker
 
 
-config = json.loads(open('config.json').read())  # Load Configs, primarily token
+config = json.loads(open('config.json').read())  # Load Configs
 client = discord.Client()
 
+
+def is_admin(author):
+    """
+    Is this user a bot admin?
+    :param author: message.author
+    :return: bool
+    """
+    if str(author) in config["admins"]:
+        return True
+    return False
 
 @client.event
 async def on_ready():
@@ -36,5 +46,11 @@ async def on_message(message):
 
     if message.content.startswith('!speaker'):
         await speaker(client, message)
+
+    if message.content.startswith('!admin'):
+        if is_admin(message.author):
+            await client.send_message(message.channel, "You Are An Admin")
+        else:
+            await client.send_message(message.channel, "You Are Not An Admin")
 
 client.run(config["token"])
