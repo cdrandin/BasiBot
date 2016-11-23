@@ -63,4 +63,4 @@ async def insult(user: str):
         await bot.say("ERROR: %s" % e)
         return
 
-bot.run('MjUwNzM5MzY1NzcxMjE0ODQ4.CxdyJQ.UcGpA5X46JYnOLWW4dYpesY0xH8')
+bot.run('')
