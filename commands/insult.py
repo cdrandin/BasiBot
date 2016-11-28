@@ -1,5 +1,7 @@
 import requests
 
+banned_names = ["brandon", "brand0n", "b-randon", "br-andon", "bra-ndon", "bran-don", "brand-on", "brando-n",
+                "br@nd0n", "br@andon", "basimot", "102645145815490560", "reznok", "monnstermash"]
 
 def get_insult():
     r = requests.get("http://www.insultgenerator.org")
@@ -15,7 +17,7 @@ async def insult(client, message):
             await client.send_message(message.channel, "{0} {1}".format(target, "Damn, you are one sexy bot."))
             return
 
-        elif any(name for name in ["brandon", "basimot", "102645145815490560", "reznok", "monnstermash"]
+        elif any(name for name in banned_names
                  if name in target.lower()):
             await client.send_message(message.channel, "I would never insult my master.")
             return
