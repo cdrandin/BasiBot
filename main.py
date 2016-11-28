@@ -9,6 +9,7 @@ from commands.speaker import speaker
 from commands.ytho import ytho
 from commands.wclogs_rankings import wclogs_rankings
 from commands.d_exec import d_exec
+from commands.pug import pug
 
 
 config = json.loads(open('config.json').read())  # Load Configs
@@ -63,6 +64,10 @@ async def on_message(message):
     if message.content.startswith('!ytho'):
         print(str(message.author))
         await ytho(client, message)
+
+    if message.content.startswith('!pug'):
+        print(str(message.author))
+        await pug(client, message)
 
     if message.content.startswith('!exec') and is_admin(message.author):
         print(str(message.author))
