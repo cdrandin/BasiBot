@@ -8,6 +8,7 @@ from commands.reddit import hentai, reddit_random
 from commands.speaker import speaker
 from commands.ytho import ytho
 from commands.wclogs_rankings import wclogs_rankings
+from commands.d_exec import d_exec
 
 
 config = json.loads(open('config.json').read())  # Load Configs
@@ -58,9 +59,14 @@ async def on_message(message):
     if message.content.startswith('!speaker'):
         print(str(message.author))
         await speaker(client, message)
+
     if message.content.startswith('!ytho'):
         print(str(message.author))
         await ytho(client, message)
+
+    if message.content.startswith('!exec') and is_admin(message.author):
+        print(str(message.author))
+        await d_exec(client, message)
 
     if message.content.startswith('!admin'):
         print(str(message.author))
