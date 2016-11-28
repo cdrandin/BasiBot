@@ -35,10 +35,11 @@ def get_sockets(player_dictionary):
                 sockets += 1
 
         for ttip in player_dictionary["items"][item]["tooltipParams"]:
-            if item in "mainHand":  # Ignore Relic
+            if item in "mainHand" or item in "offHand":  # Ignore Relic
                 continue
             if "gem" in ttip:  # Equipped gems are listed as gem0, gem1, etc...
                 equipped_gems += 1
+
 
     return {"total_sockets": sockets,
             "equipped_gems": equipped_gems}
