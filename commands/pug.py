@@ -87,7 +87,7 @@ def get_char(name, server):
         "https://us.api.battle.net/wow/character/%s/%s?fields=items&locale=en_US&apikey=%s" % (
             server, name, API_KEY))
     if r.status_code != 200:
-        raise Exception("Not 200 From API")
+        raise Exception("Could Not Find Character (No 200 from API)")
 
     player_item_dict = json.loads(r.text)
 
@@ -95,7 +95,7 @@ def get_char(name, server):
         "https://us.api.battle.net/wow/character/%s/%s?fields=progression&locale=en_US&apikey=%s" % (
             server, name, API_KEY))
     if r.status_code != 200:
-        raise Exception("Not 200 From API")
+        raise Exception("Could Not Find Character (No 200 From API)")
 
     player_progression_dict = json.loads(r.text)
 
