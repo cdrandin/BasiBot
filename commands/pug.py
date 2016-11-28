@@ -40,7 +40,6 @@ def get_sockets(player_dictionary):
             if "gem" in ttip:  # Equipped gems are listed as gem0, gem1, etc...
                 equipped_gems += 1
 
-
     return {"total_sockets": sockets,
             "equipped_gems": equipped_gems}
 
@@ -88,16 +87,16 @@ def get_char(name, server):
         "https://us.api.battle.net/wow/character/%s/%s?fields=items&locale=en_US&apikey=%s" % (
             server, name, API_KEY))
     if r.status_code != 200:
-        print("Error Loading Character")
-        return
+        raise Exception("Not 200 From API")
+
     player_item_dict = json.loads(r.text)
 
     r = requests.get(
         "https://us.api.battle.net/wow/character/%s/%s?fields=progression&locale=en_US&apikey=%s" % (
             server, name, API_KEY))
     if r.status_code != 200:
-        print("Error Loading Character")
-        return
+        raise Exception("Not 200 From API")
+
     player_progression_dict = json.loads(r.text)
 
     equipped_ivl = player_item_dict["items"]["averageItemLevelEquipped"]
@@ -140,4 +139,4 @@ async def pug(client, message):
         character_info = get_char(name, server)
         await client.send_message(message.channel, character_info)
     except Exception as e:
-        await client.send_message(message.channel, "Error Loading Character")
+        await client.send_message(message.channel, "Error: %s" % e)
