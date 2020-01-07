@@ -34,7 +34,7 @@ async def wclogs_rankings(client, message):
         element_present = EC.presence_of_element_located((By.ID, 'DataTables_Table_0'))
         WebDriverWait(driver, timeout).until(element_present)
     except TimeoutException:
-        await client.send_message(message.channel, "Error Loading Log (Timeout)")
+        await client.send(message.channel, "Error Loading Log (Timeout)")
         return
 
     soup = BeautifulSoup(driver.page_source, "html.parser")
@@ -63,6 +63,6 @@ async def wclogs_rankings(client, message):
 
     player_string = top_dps_string + "\n" + top_rankings_string
 
-    await client.send_message(message.channel, player_string)
+    await client.send(message.channel, player_string)
     return
 

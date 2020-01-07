@@ -1,8 +1,8 @@
 async def d_exec(client, message):
     try:
         r = exec(str(message.content).split("!exec")[1])
-        await client.send_message(message.channel, "Success")
+        await client.send(message.channel, "Success")
         return
     except Exception as e:
-        await client.send_message(message.channel, "Error: %s" % e)
+        await client.send(message.channel, "Error: %s" % e)
     return

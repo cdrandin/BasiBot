@@ -31,7 +31,7 @@ def get_image_url(subreddit):
 
             # do the request
             resp = get_json(subreddit, next_page)
-
+            print(resp)
             # update status code
             status_code = resp.status_code
             if status_code in [403, 404]:
@@ -50,5 +50,3 @@ def get_image_url(subreddit):
         return random.choice(urls)
     except Exception:
         return "Nothing Found"
-
-

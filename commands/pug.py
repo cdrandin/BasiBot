@@ -137,6 +137,6 @@ async def pug(client, message):
         name = i[1]
         server = i[2]
         character_info = get_char(name, server)
-        await client.send_message(message.channel, character_info)
+        await client.send(message.channel, character_info)
     except Exception as e:
-        await client.send_message(message.channel, "Error: %s" % e)
+        await client.send(message.channel, "Error: %s" % e)

@@ -1,7 +1,10 @@
+import discord
+
+
 async def speaker(client, message):
     print("Upload Received")
     try:
-        await client.send_file(message.channel, "images/speaker.png")
+        await message.channel.send(file=discord.File('images/speaker.png'))
     except Exception as e:
-        await client.send_message(message.channel, "ERROR: %s" % e)
+        await message.channel.send("ERROR: %s" % e)
     return
