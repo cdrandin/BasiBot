@@ -42,7 +42,7 @@ async def on_message(message):
     #     print(str(message.author))
     #     await wclogs_rankings(client, message)
 
-    elif message.content.startswith('!insult'):
+    if message.content.startswith('!insult'):
         print(str(message.author))
         await insult(client, message)
 
